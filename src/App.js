@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import { GlobalStyled } from './style.js';
+import { GlobalStyled, BackTopStyle } from './style.js';
 import Header from './common/header';
 import store from './store';
 import { Provider } from 'react-redux'
+import { BackTop } from 'antd';
 import {
   BrowserRouter,
-  Switch,
+  // Switch,
   Route,
-  Link
+  // Link
 } from "react-router-dom";
 import Home from './pages/home'
 import Detail from './pages/detail'
@@ -24,7 +25,9 @@ class App extends Component {
             <Route path='/detail' exact component={Detail}></Route>
           </BrowserRouter>
         </Provider>
-
+        <BackTop visibilityHeight={100}>
+          <BackTopStyle>UP</BackTopStyle>
+        </BackTop>
       </Fragment>
     );
   }

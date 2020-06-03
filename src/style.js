@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
 import iconFontStyled from "./statics/iconfont/style";
 export const GlobalStyled = createGlobalStyle`
 ${iconFontStyled}
@@ -47,3 +48,18 @@ table {
 	border-spacing: 0;
 }
 `;
+
+export const BackTopStyle = styled.div`
+height: 40px;
+	position:fixed;
+  width: 40px;
+	right:50px;
+	bottom:50px;
+  line-height: 40px;
+  border-radius: 4px;
+  text-align: center;
+  background: grey;
+  color: #fff;
+  font-size: 14px;
+	cursor: pointer;
+`

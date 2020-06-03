@@ -37,7 +37,6 @@ export default (state = defaultState, action) => {
       })
 
     case actionTypes.CHANGE_PAGE:
-      // console.log(action.page)
       return state.set('page', action.page)
     default: return state;
   }
