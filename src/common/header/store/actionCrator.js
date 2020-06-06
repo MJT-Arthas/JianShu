@@ -37,7 +37,8 @@ export const changePage = (page) => ({
 
 export const searchGet = () => {
   return (dispatch) => {
-    axios.get('https://www.fastmock.site/mock/ecb250f1bf3586ffae6c2b8f73b718c0/headerdate/api/header').then(
+    axios.get('https://www.fastmock.site/mock/ecb250f1bf3586ffae6c2b8f73b718c0/headerdate/api/header')
+    .then(
       (res) => {
         const data = res.data
         dispatch(searchChange(data.data))

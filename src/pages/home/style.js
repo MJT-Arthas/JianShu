@@ -146,29 +146,38 @@ overflow:hidden;
 }
 `
 export const Author = styled.div`
-float:left;
+position:relative;
+top:0;
+width:80px;
   line-height:30px;
   font-size:13px;
   color:#999;
 `
 
 export const Change = styled.div`
-float:right;
-  line-height:30px;
-  font-size:13px;
-  color:#999;
-  cursor: pointer;
-  .spin {
-  display:block;
-  float:left;
-  font-size:12px;
-  margin-right:6px;
-  transition: all .25s ease-in;
-  transform-origin:center center;
+position:absolute;
+top:0;
+right:0;
+line-height:30px;
+font-size:13px;
+color:#999;
+cursor: pointer;
+.spin {
+display:block;
+float:left;
+font-size:12px;
+margin-right:6px;
+transition: all .25s ease-in;
+transform-origin:center center;
 }
 `
 
+export const RecommendListWrapper = styled.div`
+position:relative;
+`
+
 export const RecommendList = styled.div`
+/* float:left; */
 padding-top:15px;
 overflow:hidden;
 /* background:red; */

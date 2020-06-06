@@ -5,13 +5,15 @@ import store from './store';
 import { Provider } from 'react-redux'
 import { BackTop } from 'antd';
 import {
-  BrowserRouter,
+  HashRouter,
+  // BrowserRouter,
   // Switch,
   Route,
   // Link
 } from "react-router-dom";
 import Home from './pages/home'
 import Detail from './pages/detail'
+import Login from './pages/login'
 
 class App extends Component {
   render() {
@@ -19,11 +21,12 @@ class App extends Component {
       <Fragment>
         <GlobalStyled />
         <Provider store={store}>
-          <Header />
-          <BrowserRouter>
+          <HashRouter>
+            <Header />
             <Route path='/' exact component={Home}></Route>
+            <Route path='/login' exact component={Login}></Route>
             <Route path='/detail' exact component={Detail}></Route>
-          </BrowserRouter>
+          </HashRouter>
         </Provider>
         <BackTop visibilityHeight={100}>
           <BackTopStyle>UP</BackTopStyle>

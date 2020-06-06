@@ -5,8 +5,10 @@ const defaultState = fromJS({
   articleList: [],
   topicList: [],
   RecommendList: [],
+  articlePage: 1,
   WriterList: [],
-  articlePage:1,
+  page:1,
+  totalPage: 1,
 })
 
 export default (state = defaultState, action) => {
@@ -17,18 +19,28 @@ export default (state = defaultState, action) => {
         articleList: fromJS(action.articleList),
         RecommendList: fromJS(action.RecommendList),
         WriterList: fromJS(action.WriterList),
+        totalPage:action.totalPage
       })
 
     case actionTypes.ADD_HOME_LIST:
       return state.merge({
-        articleList:state.get("articleList").concat(action.result),
-        articlePage:action.nextPage
+        articleList: state.get("articleList").concat(action.result),
+        articlePage: action.nextPage
       })
-      
+
+    case actionTypes.SEARCH_CHANGE:
+      return state.merge({
+        list: action.data,
+        getList: true,
+        totalPage: action.totalPage
+      })
+
+    case actionTypes.CHANGE_PAGE:
+      return state.set('page', action.page)
 
 
     // state.set('topicList', fromJS(action.topicList))
-
+    
     default: return state;
   }
 }

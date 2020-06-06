@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { CSSTransition } from "react-transition-group";
 import { actionCreators } from "./store";
+import { actionCreators as loginActionCreators } from "../../pages/login/store";
+import { Link } from "react-router-dom";
 import {
+  HeaderFixed,
   HeaderWrapper,
   Logo,
   Nav,
@@ -42,7 +45,6 @@ class Header extends Component {
       }
     }
     if (focused || mouseIn) {
-      console.log(getList);
       return (
         <SearchInfo
           onMouseEnter={handleMouseEnter}
@@ -84,46 +86,64 @@ class Header extends Component {
       handleInputBlur,
       mouseIn,
       list,
+      loginState,
+      logout,
     } = this.props;
     return (
-      <HeaderWrapper>
-        <Logo href="/" />
-        <Nav>
-          <NavItem className="left active">首页</NavItem>
-          <NavItem className="left">下载App</NavItem>
-          <NavItem className="right">登录</NavItem>
-          <NavItem className="right">
-            <span className="iconfont">&#xe636;</span>
-          </NavItem>
-          <SearchWrapper>
-            <CSSTransition
-              timeout={200}
-              in={focused || mouseIn}
-              classNames="slide"
-            >
-              <NavSearch
-                className={focused || mouseIn ? "focused" : ""}
-                onFocus={() => handleInputFocus(list)}
-                onBlur={handleInputBlur}
-              ></NavSearch>
-            </CSSTransition>
-            <span
-              className={
-                focused || mouseIn ? "focused iconfont zoom" : "iconfont zoom"
-              }
-            >
-              &#xe623;
-            </span>
-            {this.getListArea()}
-          </SearchWrapper>
-        </Nav>
-        <Addition>
-          <Button className="write">
-            <span className="iconfont">&#xe6e5;</span> 写文章
-          </Button>
-          <Button className="sign">注册</Button>
-        </Addition>
-      </HeaderWrapper>
+      <HeaderFixed>
+        <HeaderWrapper>
+          <Link to="/">
+            <Logo />
+          </Link>
+          <Nav>
+            <NavItem className="left active">首页</NavItem>
+            <NavItem className="left">下载App</NavItem>
+
+            {loginState ? (
+              <Link to="/">
+                <NavItem onClick={logout} className="right">
+                  退出
+                </NavItem>
+              </Link>
+            ) : (
+              <Link to="/login">
+                <NavItem className="right">登录</NavItem>
+              </Link>
+            )}
+
+            <NavItem className="right">
+              <span className="iconfont">&#xe636;</span>
+            </NavItem>
+            <SearchWrapper>
+              <CSSTransition
+                timeout={200}
+                in={focused || mouseIn}
+                classNames="slide"
+              >
+                <NavSearch
+                  className={focused || mouseIn ? "focused" : ""}
+                  onFocus={() => handleInputFocus(list)}
+                  onBlur={handleInputBlur}
+                ></NavSearch>
+              </CSSTransition>
+              <span
+                className={
+                  focused || mouseIn ? "focused iconfont zoom" : "iconfont zoom"
+                }
+              >
+                &#xe623;
+              </span>
+              {this.getListArea()}
+            </SearchWrapper>
+          </Nav>
+          <Addition>
+            <Button className="write">
+              <span className="iconfont">&#xe6e5;</span> 写文章
+            </Button>
+            <Button className="sign">注册</Button>
+          </Addition>
+        </HeaderWrapper>
+      </HeaderFixed>
     );
   }
 }
@@ -136,6 +156,7 @@ const mapStateToProps = (state) => {
     page: state.getIn(["header", "page"]),
     totalPage: state.getIn(["header", "totalPage"]),
     mouseIn: state.getIn(["header", "mouseIn"]),
+    loginState: state.getIn(["login", "loginState"]),
   };
 };
 
@@ -166,6 +187,9 @@ const mapStateDispatchProps = (dispatch) => {
       } else {
         dispatch(actionCreators.changePage(1));
       }
+    },
+    logout() {
+      dispatch(loginActionCreators.changeLogout());
     },
   };
 };

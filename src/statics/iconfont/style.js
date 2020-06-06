@@ -16,9 +16,10 @@ const iconFontStyled =`
   -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background:#bfc;
-}`
+// body {
+//   background:#bfc;
+// }
+`
 
 export default iconFontStyled;
 
